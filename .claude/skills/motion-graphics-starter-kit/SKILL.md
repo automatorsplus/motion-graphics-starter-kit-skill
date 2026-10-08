@@ -160,7 +160,8 @@ looks. Mention it if the member wants more styles; do not install it unasked.
 
 ## 3b. Generated stills and clips (optional, Higgsfield)
 
-Only when the member asked for generated scenes and Higgsfield is set up. Plan them in the beat table first: one
+Only when the member asked for generated scenes and Higgsfield is set up, and only once `BRIEF.md` and `PLAN.md`
+exist in the project: no credits are spent on a scene that is not in the beat table. Plan them in the beat table first: one
 still per scene that needs one, and a clip only where that scene must move on its own (a character acting, liquid,
 flames). Everything else is the still animated in code (push in, parallax, slam), which costs nothing.
 
@@ -288,7 +289,8 @@ them.
 Then **open every frame it wrote with Read** and check each one against the beat table:
 
 - the scene that should be there is there, nothing cut off or overlapping, no blank or half-loaded frame
-- every word is spelled right and readable; their logo and product are intact and unaltered
+- every word is spelled right and readable at phone size: no text under about 40px tall on a 1080p frame,
+  small taglines included; their logo and product are intact and unaltered
 - the end card shows the name and line, fully landed
 - duration is what was asked, there is an audio stream, loudness is near -14 LUFS and true peak at or under -1 dBTP
 
