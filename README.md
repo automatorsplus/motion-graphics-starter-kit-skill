@@ -1,6 +1,6 @@
 # Motion Graphics Starter Kit for Claude Code
 
-> Part of the **Automators+** skills library -- Claude Code skills shared exclusively with the Automators+ community.
+> Part of the **Automators+** skills library -- Claude Code skills shared with the Automators community: https://www.skool.com/automation-forge-7306
 
 Type what you want, from one line up to a full brief with your logos, product shots and example videos. Get back a
 finished motion graphics MP4 with music and sound effects cut to the beat, checked frame by frame before Claude
@@ -11,6 +11,7 @@ calls it done. Built on HyperFrames, HeyGen's free, open source engine that rend
 - **One line in, one film out** -- no interview. Claude asks one question at most, and only if it cannot tell what the film is for
 - **Cut to a tempo** -- the film is planned as beats on a BPM, so every cut lands on the music
 - **Music either way** -- generated with ElevenLabs Music on fal.ai if you add a key (about $0.60 a film), or made in code for free
+- **Generated scenes if you want them** -- real claymation worlds, products in a set, characters acting, made on Higgsfield (GPT Image 2 stills, Gemini Omni Flash clips) with your own account. About 6.5 credits a still and 18 a 4-second clip, said before anything runs. Optional: without it every film is built in code
 - **Sound effects included** -- about twenty whooshes, impacts, pops and risers that ship with HyperFrames, no account needed
 - **Social loudness** -- one plain volume change to about -14 LUFS, the level YouTube, Instagram and TikTok play at. No limiter squashing your mix
 - **Checked before done** -- HyperFrames' own check sampled at every transition, then frames pulled from the final MP4 at every scene and every word change and read, plus duration, loudness and peak. Claude tells you what it could not check
@@ -37,10 +38,13 @@ you go, $0.60 per film under a minute, nothing monthly. Claude asks if you want 
 and Claude saves it to `.env` and proves it with a free call. Without a key every film still gets music, made in
 code.
 
+Optional, for generated scenes: a Higgsfield account with credits ([higgsfield.ai](https://higgsfield.ai)). Claude
+installs the Higgsfield CLI and opens your browser to sign in. Your password and token never pass through the chat.
+
 Under the hood it is one command, if you would rather run it yourself:
 
 ```bash
-bash .claude/skills/motion-graphics-starter-kit/scripts/setup.sh
+bash .claude/skills/motion-graphics-starter-kit/scripts/setup.sh              # add --higgsfield for generated scenes
 ```
 
 HyperFrames' skills install to your user skills folder (`~/.claude/skills/`), so they are available in every
@@ -72,7 +76,7 @@ Or just one line: *make me a 10-second animated logo sting for my bakery, vertic
 The skill definition is in [`.claude/skills/motion-graphics-starter-kit/SKILL.md`](.claude/skills/motion-graphics-starter-kit/SKILL.md)
 and reads top to bottom: intake, a beat plan on a tempo, music first, the build in HyperFrames, sound effects on
 the cuts, check and render, loudness, then the frame-by-frame check of the final file. The looks (including
-claymation built entirely in code) are in `references/looks.md`. The scripts in `scripts/` do the setup, the fal.ai
+claymation built entirely in code) are in `references/looks.md`. The scripts in `scripts/` do the setup, the Higgsfield stills and clips, the fal.ai
 music call, the code-made music bed, the loudness and the final checks.
 
 Want more looks? The free motion presets library at [github.com/cth9191/motion-design](https://github.com/cth9191/motion-design)
@@ -96,4 +100,4 @@ MIT
 
 ---
 
-*Shared with the Automators+ community*
+*Automators+ skills library, free in the Automators community*

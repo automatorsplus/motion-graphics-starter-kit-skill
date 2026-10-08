@@ -8,4 +8,4 @@ Make a really insane, highly creative ad / motion graphics video for [product, e
 ```
 
 What to expect: the most striking image in the first second, one idea per beat, a held breath before the biggest
-move, and the product landing on the end card. If you attach a photo, it is used as given, never redrawn.
+move, and the product landing on the end card. If you attach a photo, it is used as given, never redrawn. With Higgsfield set up and a yes from you, the scenes can be generated claymation sets around your product, like the hot sauce ads in the video; without it they are built in code.

@@ -3,6 +3,7 @@
 #
 #   bash .claude/skills/motion-graphics-starter-kit/scripts/setup.sh
 #   bash .claude/skills/motion-graphics-starter-kit/scripts/setup.sh --set FAL_KEY=your_key_here
+#   bash .claude/skills/motion-graphics-starter-kit/scripts/setup.sh --higgsfield   # also set up generated scenes
 #
 # Checks the tools, installs HyperFrames' own skills with HeyGen's CLI, makes sure the render
 # browser is present, and (optionally) writes and proves a fal.ai key for generated music.
@@ -15,6 +16,7 @@ ok=0; bad=0
 pass(){ echo "  ✓ $1"; ok=$((ok+1)); }
 fail(){ echo "  ✗ $1"; bad=$((bad+1)); }
 note(){ echo "  · $1"; }
+HF=0; for a in "$@"; do [ "$a" = "--higgsfield" ] && HF=1; done
 
 if [ "${1:-}" = "--set" ]; then
   ARG="${2:-}"
@@ -114,6 +116,24 @@ else
   else
     fail "fal.ai rejected the key: $(printf '%s' "$RESP" | head -c 160)"
   fi
+fi
+
+echo
+echo "Generated scenes (optional, Higgsfield)"
+if ! command -v higgsfield >/dev/null 2>&1 && [ "$HF" -eq 1 ]; then
+  if npm install -g @higgsfield/cli >/tmp/mgsk-hf.log 2>&1; then pass "Higgsfield CLI installed"; else
+    fail "Higgsfield CLI did not install (npm install -g @higgsfield/cli). Last lines:"; tail -3 /tmp/mgsk-hf.log | sed 's/^/      /'
+  fi
+fi
+if command -v higgsfield >/dev/null 2>&1; then
+  ACC=$(higgsfield account status 2>&1 | tail -1)
+  if printf '%s' "$ACC" | grep -qi "credits"; then
+    pass "Higgsfield signed in: $ACC"
+  else
+    note "Higgsfield CLI is installed but not signed in: run  higgsfield auth login  (opens the browser)"
+  fi
+else
+  note "not set up: every film is built in code, which is fine. For generated scenes run setup again with --higgsfield"
 fi
 
 echo

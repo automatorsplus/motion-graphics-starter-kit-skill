@@ -43,6 +43,14 @@ bash .claude/skills/motion-graphics-starter-kit/scripts/setup.sh --set FAL_KEY=<
 It writes `.env` (locked, gitignored) and proves the key with a free call. Never echo the key back. If they say no,
 carry on: every film still gets music and sound effects.
 
+**Generated scenes, optional.** Most films are built entirely in code. For real generated scenes (a claymation
+world around their product, a character acting something out) the kit uses Higgsfield: GPT Image 2 for stills,
+Gemini Omni Flash for short clips animated from those stills. Ask once, only if the member wants that kind of film:
+*Do you want generated scenes? It uses your Higgsfield account and credits (about 6.5 credits a still, 18 a 4-second
+clip). Without it, everything is built in code.* If yes, `setup.sh --higgsfield` installs the Higgsfield CLI if
+needed and checks the sign-in; if it is not signed in, run `higgsfield auth login`, which opens their browser to
+sign in. Never ask for or handle a Higgsfield password or token.
+
 If HyperFrames' skills do not show in your skill list after install, they are on disk anyway: read
 `~/.claude/skills/<name>/SKILL.md` (or `.claude/skills/<name>/` in the project) directly.
 
@@ -58,6 +66,7 @@ Read what the member gave and pull out:
 | Look | from their words or reference videos, else pick from `references/looks.md` |
 | Ending | the name, plus their line if they gave one |
 | Assets | none: build everything in code |
+| Generated scenes | none. Only when they ask for real scenes or a look that needs them, and Higgsfield is set up |
 | References | none |
 
 Ask **at most one question**, and only when the subject is unclear. Everything else gets the default; state the
@@ -136,16 +145,52 @@ Then, inside the project, in this order. Do not skip a step.
    every font as a local file with an `@font-face`, so download it rather than linking it, for example
    `curl -L -o assets/fonts/Fredoka.ttf "https://github.com/google/fonts/raw/main/ofl/fredoka/Fredoka%5Bwdth%2Cwght%5D.ttf"`
    (Google Fonts' own repository; the path is `ofl/<family>/` or `apache/<family>/`).
-4. **Make the music now, before the scenes** (section 4 below), so the build is cut to real beats.
-5. **Follow HyperFrames' workflow skill** named in `BRIEF.md` (`/general-video`, or `/motion-graphics` under 10
+4. **Generated stills and clips, only if the film uses them** (section 3b below). They come before the music so
+   the beat table can be checked against real clip lengths.
+5. **Make the music now, before the scenes** (section 4 below), so the build is cut to real beats.
+6. **Follow HyperFrames' workflow skill** named in `BRIEF.md` (`/general-video`, or `/motion-graphics` under 10
    seconds), and read `/hyperframes-core` before writing any composition HTML. Their rules on structure, timing
    attributes and deterministic rendering are the contract; this skill does not repeat them. Use your beat table
    for every `data-start` and `data-duration`.
-6. Hold the kit's own bar while you build: motion in frame one, one idea per beat, type readable on a phone,
+7. Hold the kit's own bar while you build: motion in frame one, one idea per beat, type readable on a phone,
    their assets untouched, and the look from `PLAN.md` on every scene.
 
 Optional extra: the free motion presets library at https://github.com/cth9191/motion-design has ten more named
 looks. Mention it if the member wants more styles; do not install it unasked.
+
+## 3b. Generated stills and clips (optional, Higgsfield)
+
+Only when the member asked for generated scenes and Higgsfield is set up. Plan them in the beat table first: one
+still per scene that needs one, and a clip only where that scene must move on its own (a character acting, liquid,
+flames). Everything else is the still animated in code (push in, parallax, slam), which costs nothing.
+
+Say the total before the first call, from the beat table, for example *Higgsfield: 5 stills and 3 four-second clips,
+about 86 credits*. Check the balance and exact prices for free:
+
+```bash
+bash $KIT/scripts/higgsfield_gen.sh cost image 16:9
+```
+
+Then, one call per still, writing one shared style sentence at the start of every prompt so the scenes match:
+
+```bash
+bash $KIT/scripts/higgsfield_gen.sh image assets/gen/s1.png 16:9 "<style sentence> <the scene>" --image assets/<their product>.png
+```
+
+Pass their product, character and logo images as `--image` references (repeat the flag, up to about four) and say
+in the prompt to copy them exactly. Open every still with Read before animating it. Reject and regenerate any still
+where their product, label or character has drifted, and do not animate a still you have not looked at.
+
+A clip from a still (4 to 8 seconds; 4 covers two bars at 120 BPM):
+
+```bash
+bash $KIT/scripts/higgsfield_gen.sh clip assets/gen/c1.mp4 16:9 assets/gen/s1.png 4 "<what moves>. Single continuous shot, no text."
+```
+
+Place clips as `<video muted>` with `data-start` on their beat: the music and sound effects are the soundtrack.
+Generated scenes never replace their real assets: the end card and any packshot use their own logo and product
+files, untouched. Run the calls in the background in parallel when there are several, and keep the stills and clips
+in `assets/gen/`.
 
 ## 4. Music, cut to the tempo
 
@@ -251,7 +296,7 @@ Fix what fails, re-render and check again. Then report to the member:
 
 - the path of the final MP4, its duration, size and loudness
 - one line on the look and the tempo
-- what was spent (music: $0.60 or nothing)
+- what was spent (music: $0.60 or nothing; Higgsfield credits if any were used)
 - **what you did not verify.** Frames are stills, so say plainly that motion between your sampled frames and
   how the sound feels in sync were not checked by eye or ear, and ask them to watch it once with sound
 
@@ -266,5 +311,6 @@ project.
 - The member's logos, products and characters are used as given.
 - The member's request is the go-ahead to render. If a HyperFrames workflow says to wait for approval before
   rendering, this kit overrides it: render, verify, then show them the result.
-- The only paid call in this skill is music on fal.ai, and its cost is said before it runs.
+- The only paid calls in this skill are music on fal.ai and generated scenes on Higgsfield. Each cost is said
+  before it runs, and neither is used unless the member said yes to it.
 - Do not copy HeyGen's skills into this one. They install and update through `npx hyperframes skills`.
