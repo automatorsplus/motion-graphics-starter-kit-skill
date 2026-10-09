@@ -16,6 +16,7 @@ calls it done. Built on HyperFrames, HeyGen's free, open source engine that rend
 - **Social loudness** -- one plain volume change to about -14 LUFS, the level YouTube, Instagram and TikTok play at. No limiter squashing your mix
 - **Checked before done** -- HyperFrames' own check sampled at every transition, then frames pulled from the final MP4 at every scene and every word change and read, plus duration, loudness and peak. Claude tells you what it could not check
 - **Your assets stay yours** -- logos, products and characters are used as given, never redrawn
+- **Three ready prompts** -- a reel of your products and characters, a one-product hook ad, a launch film in the style of videos you like
 - **A test kit** -- run the same prompt on two models and see which film wins and what each one cost, read from the session logs on your own machine
 
 ## Setup
@@ -57,12 +58,18 @@ git clone https://github.com/automatorsplus/motion-graphics-starter-kit-skill
 ```
 
 Copy `.claude/skills/motion-graphics-starter-kit/` into your project's `.claude/skills/` folder, or into
-`~/.claude/skills/` to have it in every project. Copy the whole folder: the skill runs its scripts and test kit
-from there, so the SKILL.md on its own is not enough.
+`~/.claude/skills/` to have it in every project. Copy the whole folder: the skill runs its scripts, examples and
+test kit from there, so the SKILL.md on its own is not enough.
 
 ## Try It
 
-Tell Claude what you want in one line: *make me a 10-second animated logo sting for my bakery, vertical.*
+The three prompts in `examples/`, ready to fill in:
+
+- Build me a motion graphics video in the claymation style. Use all the products and characters from [folder]. Add music and sound effects so it really pops. Render it to MP4.
+- Make a really insane, highly creative ad / motion graphics video for [product] in the claymation style, about 15 seconds. It needs a real wow factor: this is the hook at the start of a YouTube video, so it has to keep viewers hooked. Add music and sound effects so it really pops.
+- Make a 15-second launch film for [app]. It needs outstanding motion graphics that really stand out, not something basic or corporate. Look at the motion graphics in these example videos: [links], and build it in that style with HyperFrames. End on the name and the line: [tagline]. Add music and sound effects cut to the beats. Render it to MP4.
+
+Or just one line: *make me a 10-second animated logo sting for my bakery, vertical.*
 
 ## How It Works
 

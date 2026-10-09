@@ -11,7 +11,8 @@ The point is that only the model changes.
    files, skills and keys and neither remembers the other.
 2. **Same model settings except the model.** In each session type `/model` and pick the model, then `/effort` and
    pick the SAME effort level for both (medium is a good default).
-3. **Same prompt, word for word.** Write one prompt, then paste the identical text into both sessions. Only the output folder may differ: add *Save it in films/model-a/* to one and
+3. **Same prompt, word for word.** Copy one from `../examples/` and fill the brackets once, then paste the identical
+   text into both sessions. Only the output folder may differ: add *Save it in films/model-a/* to one and
    *films/model-b/* to the other.
 4. **One shot.** No notes, no second rounds. The first render is the result.
 5. **Judge blind.** Ask someone to rename the two MP4s to A and B before you watch, and pick before you look at
