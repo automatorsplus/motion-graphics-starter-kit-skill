@@ -15,8 +15,8 @@ for any video request. When this kit is installed, a NEW film starts here instea
 then hands the build to HeyGen's workflow skill in section 3, which is the same place `/hyperframes` would route
 to. Edits to an existing HyperFrames project can go straight to HeyGen's skills.
 
-Read this file top to bottom on every run. `references/looks.md` holds the looks. `examples/` holds three ready
-prompts. `test-kit/` is for comparing two models on the same prompt and is not part of a normal run.
+Read this file top to bottom on every run. `references/looks.md` holds the looks.
+`test-kit/` is for comparing two models on the same prompt and is not part of a normal run.
 
 ## First time in a project: you do the setup
 
