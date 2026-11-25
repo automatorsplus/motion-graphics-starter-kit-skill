@@ -1,6 +1,6 @@
 # Motion Graphics Starter Kit for Claude Code
 
-> Part of the **Automators+** skills library -- Claude Code skills shared with the Automators community: https://www.skool.com/automation-forge-7306
+> Part of the **Automators+** skills library -- Claude Code skills shared with the Automators community: https://www.skool.com/automation-forge-7306/about
 
 Type what you want, from one line up to a full brief with your logos, product shots and example videos. Get back a
 finished motion graphics MP4 with music and sound effects cut to the beat, checked frame by frame before Claude
